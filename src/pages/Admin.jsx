@@ -22,7 +22,7 @@ import { FALLBACK_SERVICES, FALLBACK_STYLISTS } from "@/lib/fallbackData";
 export default function Admin() {
   const [pinInput, setPinInput] = useState("");
   const [authenticated, setAuthenticated] = useState(
-    () => sessionStorage.getItem("admin_authenticated") === "true"
+    () => localStorage.getItem("admin_authenticated") === "true"
   );
   const [pinError, setPinError] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Admin() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (pinInput === "123456" || pinInput === "admin") {
-      sessionStorage.setItem("admin_authenticated", "true");
+      localStorage.setItem("admin_authenticated", "true");
       setAuthenticated(true);
       setPinError(false);
     } else {
@@ -44,7 +44,7 @@ export default function Admin() {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("admin_authenticated");
+    localStorage.removeItem("admin_authenticated");
     setAuthenticated(false);
   };
 
@@ -153,13 +153,13 @@ export default function Admin() {
             <div>
               <input
                 type="password"
-                placeholder="Enter passcode (default: 123456)"
+                placeholder="Enter passcode"
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
                 className="w-full bg-background/80 border border-foreground/20 px-4 py-3 text-center text-lg tracking-widest rounded-sm focus:outline-none focus:border-foreground"
               />
               {pinError && (
-                <p className="text-xs text-red-500 mt-2">Incorrect passcode. Try: 123456</p>
+                <p className="text-xs text-red-500 mt-2">Incorrect passcode. Please try again.</p>
               )}
             </div>
             <button
