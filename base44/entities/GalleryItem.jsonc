@@ -1,0 +1,30 @@
+{
+  "name": "GalleryItem",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "color",
+        "bridal",
+        "cuts",
+        "nails",
+        "skin"
+      ]
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "image_url"
+  ]
+}
