@@ -29,10 +29,17 @@ export default function Book() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await base44.entities.Booking.create({ ...form, status: "pending" });
-    } catch {
-      // Continue to confirmation even if the entity write fails (e.g., private app).
+      await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, status: "pending" })
+      });
+    } catch (err) {
+      console.error('Failed to save booking to Cloudflare:', err);
     }
+    try {
+      await base44.entities.Booking.create({ ...form, status: "pending" });
+    } catch {}
     const q = new URLSearchParams({
       name: form.client_name,
       date: form.requested_date,

@@ -19,6 +19,7 @@ import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import Accessibility from '@/pages/Accessibility';
 import Refund from '@/pages/Refund';
+import Admin from '@/pages/Admin';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -60,6 +61,7 @@ const AuthenticatedApp = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/refund" element={<Refund />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

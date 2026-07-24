@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "viet-beauty-salon",
+  "main": "src/worker.js",
   "compatibility_date": "2026-07-24",
   "observability": {
     "enabled": true
@@ -9,6 +10,12 @@
     "directory": "./dist",
     "not_found_handling": "single-page-application"
   },
+  "kv_namespaces": [
+    {
+      "binding": "BOOKINGS_KV",
+      "id": "viet_beauty_salon_bookings"
+    }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]

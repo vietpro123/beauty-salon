@@ -75,6 +75,7 @@ export default function Footer() {
             <Link to="/terms" className="hover:text-background">Terms</Link>
             <Link to="/accessibility" className="hover:text-background">Accessibility</Link>
             <Link to="/refund" className="hover:text-background">Refund</Link>
+            <Link to="/admin" className="hover:text-background text-secondary font-semibold">Admin</Link>
           </div>
         </div>
       </div>
