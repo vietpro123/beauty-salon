@@ -13,6 +13,8 @@ export const base44 = createClient({
   appBaseUrl: appBaseUrl || ''
 });
 
+const isStandalone = !appId && !appBaseUrl;
+
 // Disable SDK analytics tracking to prevent 405 errors on standalone deployments
 if (base44.analytics) {
   try {
@@ -21,4 +23,20 @@ if (base44.analytics) {
   } catch (e) {
     // Ignore cleanup errors
   }
+}
+
+// In standalone mode without a Base44 backend URL, return dummy promises immediately
+if (isStandalone && base44.entities) {
+  base44.entities = new Proxy(base44.entities, {
+    get() {
+      return {
+        list: async () => [],
+        filter: async () => [],
+        get: async () => null,
+        create: async (data) => ({ id: "local", ...data }),
+        update: async (id, data) => ({ id, ...data }),
+        delete: async () => true,
+      };
+    }
+  });
 }
