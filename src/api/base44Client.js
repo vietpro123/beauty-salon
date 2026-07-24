@@ -12,3 +12,13 @@ export const base44 = createClient({
   requiresAuth: false,
   appBaseUrl: appBaseUrl || ''
 });
+
+// Disable SDK analytics tracking to prevent 405 errors on standalone deployments
+if (base44.analytics) {
+  try {
+    base44.analytics.cleanup();
+    base44.analytics.track = () => {};
+  } catch (e) {
+    // Ignore cleanup errors
+  }
+}
